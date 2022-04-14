@@ -1,0 +1,17 @@
+server:
+ port: 4399
+spring:
+  application:
+    name: MICROSERVICE-ZUUL-GATEWAY
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka #注册到注册中心
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: false #不显示ip地址
+zuul:
+  routes:
+    springcloud-demo-ehr: /api/** #springcloud-demo-ehr的别名 通过访问http://localhost:4399/api/getEmp/1
+  ignored-services: springcloud-demo-ehr #忽视不创建路由规则 这样不能访问http://localhost:4399/springcloud-demo-ehr/getEmp/1
+  prefix: /ehr #前缀 访问http://localhost:4399/ehr/api/getEmp/1
